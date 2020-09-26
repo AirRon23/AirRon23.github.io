@@ -1,5 +1,146 @@
-<html>
-	<body>
-		<p>Hello World!</p>
-	</body>
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Aaron and Eva</title>
+<link rel="stylesheet" href="./foundation-6.2.1-complete/css/foundation.css">
+<link rel="shortcut icon" href="images/favicon.ico" type='image/x-icon'/>
+
+<!-- Link to Adobe Typekit Web Fonts -->
+<script src="https://use.typekit.net/owp8wrq.js"></script>
+<script>try{Typekit.load({ async: true });}catch(e){}</script>
+<!-- end Typekit -->
+<style>
+.circle-img {
+    border-radius:50%;
+}
+
+#large-svg-img {
+  display: none;
+}
+
+#small-svg-img {
+  display: none;
+}
+
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+   #large-svg {
+      display: none !important;
+    }
+    #small-svg {
+      display: none !important;
+    }
+    #small-svg-img {
+      display: inherit !important;
+    }
+    #large-svg-img {
+      display: inherit !important;
+    }
+}
+
+
+#small-img-cycler{position:relative;  width:50vw;
+  margin:0 auto;
+  display: block;}
+#small-img-cycler img{position:absolute;z-index:1}
+#small-img-cycler img.active{z-index:3}
+
+
+#large-img-cycler{width:30vw;
+    margin:0 auto;
+    display: block;
+    max-width: 400px;
+    position: relative;
+    top:-17vw; }
+#large-img-cycler img{position:absolute;z-index:1}
+#large-img-cycler img.active{z-index:3}
+@media screen and (min-width:1250px) {
+  #large-img-cycler {
+    top:-188px;
+  }
+}
+</style>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+      $(function(){
+        console.log("hiding stuff")
+        $(document.body).hide();
+      });
+      $(window).load(function() {
+        console.log("showing stuff")
+        $(document.body).show();
+      });
+</script>
+
+</head>
+<body
+    style="background: url(images/bg-tile70.jpg) repeat left bottom;
+           padding-top:80px;">
+
+<div class="small-12 columns show-for-small-only" style="padding-bottom:200px;">
+        <img id="small-svg-img" src="images/ae-title_sm.png">
+        <object id="small-svg" type="image/svg+xml" data="images/ae-title-color_sm.svg">Your browser does not support SVGs</object>
+        <div id="small-img-cycler">
+          <img class="small-img circle-img small-active" src="./images/circlesm1.jpg">
+          <img class="small-img circle-img" src="./images/circlesm2.jpg">
+          <img class="small-img circle-img" src="./images/circlesm3.jpg">
+          <img class="small-img circle-img" src="./images/circlesm4.jpg">
+          <img class="small-img circle-img" src="./images/circlesm5.jpg">
+          <img class="small-img circle-img" src="./images/circlesm6.jpg">
+          <img class="small-img circle-img" src="./images/circlesm7.jpg">
+          <img class="small-img circle-img" src="./images/circlesm8.jpg">
+          <img class="small-img circle-img" src="./images/circlesm9.jpg">
+        </div>
+</div>
+
+<div class="hide-for-small-only" style="max-width:1250px; margin: 0 auto; padding-bottom:300px;">
+  <img id="large-svg-img" src="images/ae-title_lg.png">
+  <object id="large-svg" type="image/svg+xml" data="images/ae-title-color_lg2.svg">Your browser does not support SVGs</object>
+        <div id="large-img-cycler">
+          <img class="large-img circle-img large-active" src="./images/circlesm1.jpg"> 
+          <img class="large-img circle-img" src="./images/circlesm2.jpg"> 
+          <img class="large-img circle-img" src="./images/circlesm3.jpg"> 
+          <img class="large-img circle-img" src="./images/circlesm4.jpg"> 
+          <img class="large-img circle-img" src="./images/circlesm5.jpg">
+          <img class="large-img circle-img" src="./images/circlesm6.jpg">
+          <img class="large-img circle-img" src="./images/circlesm7.jpg">
+          <img class="large-img circle-img" src="./images/circlesm8.jpg">
+          <img class="large-img circle-img" src="./images/circlesm9.jpg">
+        </div>
+</div>
+<script src="./foundation-6.2.1-complete/js/vendor/foundation.js"></script>
+<script>
+      $(document).foundation();
+</script>
+<script>
+function cycleImagesSmall(){
+        var $active = $('#small-img-cycler .small-active');
+        var $next = ($active.next().length > 0) ? $active.next() : $('#small-img-cycler img:first');
+        $next.css('z-index',2);//move the next image up the pile
+        $active.fadeOut(1500,function(){//fade out the top image
+        $active.css('z-index',1).show().removeClass('small-active');//reset the z-index and unhide the image
+        $next.css('z-index',3).addClass('small-active');//make the next image the top one
+      });
+    }
+
+    function cycleImagesLarge(){
+        var $active = $('#large-img-cycler .large-active');
+        var $next = ($active.next().length > 0) ? $active.next() : $('#large-img-cycler img:first');
+        $next.css('z-index',2);//move the next image up the pile
+        $active.fadeOut(1500,function(){//fade out the top image
+        $active.css('z-index',1).show().removeClass('large-active');//reset the z-index and unhide the image
+        $next.css('z-index',3).addClass('large-active');//make the next image the top one
+      });
+    }
+
+$(document).ready(function(){
+  // run every 5s
+  setInterval('cycleImagesSmall()', 5000);
+  setInterval('cycleImagesLarge()', 5000);
+
+})
+</script>
+</body>
 </html>
